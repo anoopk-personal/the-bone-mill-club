@@ -1,8 +1,8 @@
 # The Bone Mill Club | Remote-first reference architecture
 
-**Status:** Architecture proposal, reviewed 2026-11-08. **No deployment approval.**  
-**Reference provider:** Google Cloud (`us-central1`). **Provider choice is not final.**  
-**Authority:** [Constitution](../CONSTITUTION.md). **First release:** one AI and data engineering Research Agent.  
+**Status:** Architecture proposal, reviewed 2026-11-08. **No deployment approval.**
+**Reference provider:** Google Cloud (`us-central1`). **Provider choice is not final.**
+**Authority:** [Constitution](../CONSTITUTION.md). **First release:** one AI and data engineering Research Agent.
 **Writing:** Short, controlled technical English using ASD-STE100 principles. This document is not formally STE-certified.
 
 > **Read the diagrams first.** Names identify proposed services. No project, API, network, identity, or workload shown here exists yet.
@@ -116,9 +116,9 @@
 
 See [sequence diagram](diagrams/02-task-flow.svg). The system MUST implement the following states:
 
-`queued → reserved → running → validating → completed`  
-`running → checkpointed → queued` after a valid resume  
-`running → awaiting_approval → queued | denied`  
+`queued → reserved → running → validating → completed`
+`running → checkpointed → queued` after a valid resume
+`running → awaiting_approval → queued | denied`
 `any active state → canceled | failed | quarantined`
 
 | Step | Required rule |
