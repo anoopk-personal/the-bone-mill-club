@@ -22,4 +22,4 @@ Read the [Constitution](CONSTITUTION.md) for the governing principles.
 
 **Foundation stage.** The constitution is adopted. No agent runtime, hosted service, or digital employees have been deployed yet. Architecture and hosting decisions remain open.
 
-The code will be developed in public; licensing and external contribution policies are not yet finalized.
+The project is licensed under [Apache 2.0](LICENSE). External contribution guidelines are still being developed.
