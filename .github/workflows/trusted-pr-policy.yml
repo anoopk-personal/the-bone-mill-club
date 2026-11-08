@@ -1,0 +1,87 @@
+name: Trusted PR Policy
+
+# This workflow runs from the protected default branch, never the PR branch.
+# Do not check out, build, or execute pull request code here.
+on:
+  pull_request_target:
+    branches: [main]
+    types: [opened, reopened, synchronize, edited, ready_for_review]
+
+permissions:
+  pull-requests: read
+
+concurrency:
+  group: trusted-pr-policy-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  trusted-policy:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - name: Protect GitHub configuration
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import json
+          import os
+          import sys
+          import urllib.request
+
+          repo = os.environ["GITHUB_REPOSITORY"]
+          with open(os.environ["GITHUB_EVENT_PATH"], encoding="utf-8") as event_file:
+              number = int(json.load(event_file)["number"])
+
+          def github_api(path):
+              request = urllib.request.Request(
+                  "https://api.github.com" + path,
+                  headers={
+                      "Authorization": "Bearer " + os.environ["GH_TOKEN"],
+                      "Accept": "application/vnd.github+json",
+                      "X-GitHub-Api-Version": "2022-11-28",
+                  },
+              )
+              with urllib.request.urlopen(request, timeout=20) as response:
+                  return json.load(response)
+
+          pr = github_api(f"/repos/{repo}/pulls/{number}")
+          total = pr["changed_files"]
+          if total >= 3000:
+              sys.exit("PR is too large for a complete GitHub file review.")
+
+          files = []
+          for page in range(1, 32):
+              chunk = github_api(
+                  f"/repos/{repo}/pulls/{number}/files?per_page=100&page={page}"
+              )
+              if not isinstance(chunk, list):
+                  sys.exit("Unexpected GitHub API response.")
+              files.extend(chunk)
+              if len(chunk) < 100:
+                  break
+          if len(files) != total:
+              sys.exit("Incomplete changed-file list; failing closed.")
+
+          def protected(path):
+              return path == ".github" or path.startswith(".github/")
+
+          sensitive_change = any(
+              protected(item["filename"])
+              or protected(item.get("previous_filename", ""))
+              for item in files
+          )
+          if sensitive_change:
+              head_repo = pr["head"]["repo"] or {}
+              owner_pr = (
+                  pr["user"]["login"] == "anoop1986k"
+                  and head_repo.get("full_name") == repo
+              )
+              if not owner_pr:
+                  print("::error::Only owner-authored PRs from this repository may change .github/.")
+                  sys.exit(1)
+
+          print("Trusted GitHub configuration policy passed.")
+          PY
