@@ -3,6 +3,7 @@ name: PR Security
 on:
   pull_request:
     branches: [main]
+    types: [opened, reopened, synchronize, edited, ready_for_review]
 
 # Untrusted PR code must never have repository write or deployment access.
 permissions:
@@ -17,6 +18,56 @@ jobs:
     runs-on: ubuntu-24.04
     timeout-minutes: 10
     steps:
+      - name: Validate branch name and PR description
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import json
+          import os
+          import re
+          import sys
+
+          with open(os.environ["GITHUB_EVENT_PATH"], encoding="utf-8") as f:
+              pr = json.load(f)["pull_request"]
+
+          branch = pr["head"]["ref"]
+          title = (pr.get("title") or "").strip()
+          body = pr.get("body") or ""
+          errors = []
+
+          branch_match = re.fullmatch(
+              r"(feature|fix|docs|chore)/[a-z0-9]+(?:-[a-z0-9]+)*", branch
+          )
+          if not branch_match:
+              errors.append("Branch must be feature/, fix/, docs/, or chore/ followed by lowercase kebab-case.")
+
+          title_match = re.fullmatch(r"(feature|fix|docs|chore): \S.*", title)
+          if not title_match:
+              errors.append("PR title must begin with feature:, fix:, docs:, or chore:.")
+          elif branch_match and title_match.group(1) != branch_match.group(1):
+              errors.append("PR title type must match the branch prefix.")
+
+          def section_text(heading):
+              match = re.search(r"(?im)^##[ \t]+" + heading + r"[ \t]*$", body)
+              if not match:
+                  return None
+              rest = body[match.end():]
+              next_section = re.search(r"(?m)^##[ \t]+\S", rest)
+              section = rest[:next_section.start()] if next_section else rest
+              return re.sub(r"(?s)<!--.*?-->", "", section).strip()
+
+          for heading in ("Summary", "Verification"):
+              value = section_text(heading)
+              if not value or not any(char.isalnum() for char in value):
+                  errors.append("PR body needs a nonempty ## " + heading + " section.")
+
+          if errors:
+              for error in errors:
+                  print("::error::" + error)
+              sys.exit(1)
+
+          print("Branch, title, and PR sections are valid.")
+          PY
       - name: Checkout PR (no persisted credentials)
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
