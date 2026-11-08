@@ -1,6 +1,6 @@
 # The Bone Mill Club
 
-**An Autonomous Digital Workforce**  
+**An Autonomous Digital Workforce**
 **Constitution | Version 1.1**
 
 ## Purpose
