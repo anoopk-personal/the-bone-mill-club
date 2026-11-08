@@ -6,9 +6,7 @@
 
 **An Autonomous Digital Workforce**
 
-I'm building a personal fleet of cloud-based AI agents. Each agent will have its own identity, responsibilities, and permissions. Some will work independently; others will collaborate. I want to reach them securely from anywhere without paying for idle infrastructure.
-
-This is my open-source hobby project. I'm starting small and will build only what I can test and maintain.
+A personal, open-source project to build a fleet of cloud-based AI agents. Each agent will have a distinct identity, responsibilities, and permissions. Agents may work independently or collaborate, with secure access from anywhere and minimal idle infrastructure.
 
 ## Priorities
 
