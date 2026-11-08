@@ -17,4 +17,6 @@ A personal, open-source project to build a fleet of cloud-based AI agents. Each 
 
 ## Status
 
-Foundation stage. This repository contains the [constitution](CONSTITUTION.md), [Apache 2.0 license](LICENSE), and basic GitHub PR/CI safeguards. **No agents or cloud services are deployed yet.** Hosting and runtime choices remain open.
+The [remote-first architecture proposal](docs/ARCHITECTURE.md) includes deployment, task-flow, trust-boundary, and recovery diagrams. The repository also contains the [constitution](CONSTITUTION.md), [Apache 2.0 license](LICENSE), and GitHub PR/CI safeguards.
+
+**No agents or cloud services are deployed.** The hosting provider and runtime are not final.
