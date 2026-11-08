@@ -1,25 +1,22 @@
 <p align="center">
-  <img src="assets/brand/crest.webp" alt="The Bone Mill Club industrial crest" width="420" />
+  <img src="assets/brand/crest.webp" alt="The Bone Mill Club crest" width="360" />
 </p>
 
 # The Bone Mill Club
 
 **An Autonomous Digital Workforce**
 
-The Bone Mill Club is a public project to build a personal workforce of cloud-based AI agents. Each digital employee will have its own identity, responsibilities, and boundaries. Some will operate independently; others will collaborate in teams.
+I'm building a personal fleet of cloud-based AI agents. Each agent will have its own identity, responsibilities, and permissions. Some will work independently; others will collaborate. I want to reach them securely from anywhere without paying for idle infrastructure.
 
-## What guides us
+This is my open-source hobby project. I'm starting small and will build only what I can test and maintain.
 
-- **Security is mandatory.** Identity, permissions, and private data remain protected.
-- **Cost is intentional.** Favor economical, on-demand operation within approved budgets.
-- **Agents are independent.** Compose teams without requiring one cloud, model, or harness.
-- **Humans stay in control.** Autonomy is scoped, observable, and revocable.
-- **Keep it simple.** Implement what has a real use case and can be tested.
+## Priorities
 
-Read the [Constitution](CONSTITUTION.md) for the governing principles.
+- **Security:** Isolate identities, permissions, and private data.
+- **Cost:** Set budgets and avoid unnecessary infrastructure.
+- **Portability:** Keep agents independent of any one cloud, model, or coding harness.
+- **Control:** Give agents scoped autonomy and keep their work observable.
 
-## Current status
+## Status
 
-**Foundation stage.** The constitution is adopted. No agent runtime, hosted service, or digital employees have been deployed yet. Architecture and hosting decisions remain open.
-
-The code will be developed in public; licensing and external contribution policies are not yet finalized.
+Foundation stage. This repository contains the [constitution](CONSTITUTION.md), [Apache 2.0 license](LICENSE), and basic GitHub PR/CI safeguards. **No agents or cloud services are deployed yet.** Hosting and runtime choices remain open.

@@ -1,55 +1,50 @@
 # The Bone Mill Club
 
 **An Autonomous Digital Workforce**
+**Constitution | Version 1.1**
 
-**Constitution | Version 1.0**
+## Purpose
 
-## Our Mission
+I'm building my own fleet of cloud-based AI agents. Each will have a defined role and identity, and some may work together. I want a workforce I can reach from anywhere, run economically, and keep under my control.
 
-Build a secure, affordable, open-source ecosystem of autonomous digital employees that can work independently, collaborate when needed, and remain accountable to their human owner.
+## Principles
 
-## Our Principles
+### 1. Security without compromise
 
-### 1. Security Without Compromise
+I won't trade security for cost or convenience. Every agent and integration must have appropriate isolation, explicit permissions, and least-privilege access. Private information stays private.
 
-Security is a prerequisite, not a trade-off. Every agent and integration must operate within independently enforced identity, authorization, and least-privilege boundaries. Sensitive information must remain protected.
+### 2. Cost-conscious by design
 
-### 2. Cost-Conscious by Design
+This is a personal project. Every paid service must justify its cost. I'll approve overall and per-agent budgets; agents may spend autonomously only within those limits.
 
-Cost is our primary optimization target within mandatory security constraints. Every resource and paid operation must justify its value. Agents may spend autonomously only within owner-approved budgets and boundaries.
+### 3. Independent, composable agents
 
-### 3. Independent, Composable Agents
+Each agent has its own identity, responsibilities, and capabilities. Agents can work alone or collaborate without inheriting each other's privileges.
 
-Every agent has its own identity, purpose, capabilities, and responsibilities. Agents may work independently, form teams, or collaborate through authorized interfaces without inheriting unauthorized privileges.
+### 4. Autonomy with human control
 
-### 4. Autonomy With Human Control
+Agents can act within defined, revocable authority. Consequential actions need my approval. I retain control over access, spending, and operations.
 
-Agents operate autonomously within explicit, revocable authority. Consequential actions require appropriate approval. The owner retains ultimate control over permissions, spending, and operations.
+### 5. Accessible without waste
 
-### 5. Accessible Without Waste
+I should be able to reach my agents securely from anywhere with an internet connection. Idle infrastructure should cost as little as practical.
 
-The workforce must be securely accessible from anywhere with an internet connection. Availability and responsiveness should be achieved without unnecessary continuously running infrastructure.
+### 6. Pragmatic portability
 
-### 6. Pragmatic Portability
+Core agent logic should not depend unnecessarily on a particular cloud, model, harness, or framework. Provider-specific services are acceptable when the benefits outweigh the lock-in.
 
-Core agent capabilities must not be unnecessarily tied to any cloud, model, coding harness, or framework. Provider-specific technologies are acceptable when their benefits justify their dependencies.
+### 7. Observable and accountable
 
-### 7. Observable and Accountable
+I need to know what agents do, whether they're healthy, and what they cost. Logs and metrics should be useful, private, and economical.
 
-Agent activity, health, spending, and security-relevant actions must be measurable and auditable. Observability must respect privacy, minimize retained data, and remain cost-conscious.
+### 8. Open source, private operations
 
-### 8. Open Source, Private Operations
+The code and non-sensitive engineering work can be public. Credentials, personal data, operational state, and privileged access cannot. Contributions never grant access to my private systems.
 
-Our code and non-sensitive engineering knowledge are public. Credentials, personal data, operational state, and private infrastructure remain protected. External contributions do not confer operational trust.
+### 9. Simplicity over ceremony
 
-### 9. Simplicity Must Be Earned
-
-Build only what demonstrable requirements justify. Significant decisions must be supported by evidence and documented concisely. Prefer tested, maintainable solutions over speculative abstractions and unnecessary complexity.
+I'll build against real needs, test what I ship, and document significant decisions briefly. No speculative architecture, unnecessary abstractions, or paperwork for its own sake.
 
 ## Governance
 
-These principles guide all architecture, implementation, and operational decisions.
-
-Changes require explicit owner approval. Implementation details belong in specifications, code, tests, and Architecture Decision Records, not in this constitution.
-
-**Our commitment:** A secure, economical, independent, and accountable digital workforce that remains under human control.
+These principles guide my design and operational choices. Changes to this constitution require my approval. Implementation details belong in code, tests, and short decision records when needed.
