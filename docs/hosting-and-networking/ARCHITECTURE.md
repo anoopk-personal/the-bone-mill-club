@@ -145,12 +145,15 @@ sequenceDiagram
 | --- | --- |
 | Task states | `queued → reserved → running → validating → completed`; also `checkpointed`, `awaiting_approval`, `denied`, `canceled`, `failed`, `quarantined` |
 | Priority | Urgent work precedes scheduled work in the queue; prevent starvation; do not interrupt running work automatically |
-| Capacity | 2–3 concurrent tasks including delegated workers; pause or approval releases compute; bounded retries |\n| Job timeout | Start with a 60-minute Cloud Run Job task timeout (default is 10 minutes); checkpoint long work |
+| Capacity | 2–3 concurrent tasks including delegated workers; pause or approval releases compute; bounded retries |
+| Job timeout | Start with a 60-minute Cloud Run Job task timeout (default is 10 minutes); checkpoint long work |
 | Restart | Pull Pub/Sub again; reconcile executions, leases, budgets, and missed schedules; bounded catch-up; no exactly-once claim for external APIs |
-| Quality | Check source reachability, citation evidence, duplicate findings, completeness, and budget before marking success |\n| Notifications | Notify on completion, failures, approvals, security, and budget events; support summaries and private lock-screen content |
+| Quality | Check source reachability, citation evidence, duplicate findings, completeness, and budget before marking success |
+| Notifications | Notify on completion, failures, approvals, security, and budget events; support summaries and private lock-screen content |
 | Emergency controls | Pause, resume, cancel, retry, quarantine, per-agent stop, and global stop; stop new tool calls at gateway |
 | Approval | Exact-action, owner-only, 24 h default expiry; expiry is denial; persist state for later retry |
-| Autonomy | Dynamic plans inside fixed policy; code, permanent agent identities, deployments, and permissions require owner-approved PRs |\n| Models | Route to approved providers by cost, quality, privacy, and availability; log cost per successful task |
+| Autonomy | Dynamic plans inside fixed policy; code, permanent agent identities, deployments, and permissions require owner-approved PRs |
+| Models | Route to approved providers by cost, quality, privacy, and availability; log cost per successful task |
 
 **v1 isolation limit:** Cloud Run Jobs runs **reviewed Research Agent code only**. It is not approved as a general sandbox for arbitrary agent-generated code. A future Engineering Agent needs a separate isolation and egress review.
 
@@ -179,7 +182,9 @@ flowchart LR
 | Backup identity | Export/write to protected recovery bucket | No delete of protected history; separate admin boundary |
 | GitHub OIDC principal (future) | Approved image publishing and IaC deployment | No long-lived cloud keys, PR secrets, or unrestricted runtime impersonation |
 
-**Memory policy:** Private per-agent memory by default. The gateway authorizes each cross-agent share. Record source evidence and support review, correction, and deletion.\n\n**Firestore warning:** Server SDKs bypass Firestore Security Rules. IAM does not enforce record-level agent ownership. The gateway must check `owner`, `agent_id`, `task_id`, and action on each data operation. Workers have no direct Firestore access.
+**Memory policy:** Private per-agent memory by default. The gateway authorizes each cross-agent share. Record source evidence and support review, correction, and deletion.
+
+**Firestore warning:** Server SDKs bypass Firestore Security Rules. IAM does not enforce record-level agent ownership. The gateway must check `owner`, `agent_id`, `task_id`, and action on each data operation. Workers have no direct Firestore access.
 
 **GCP APIs to enable only after approval:**
 
