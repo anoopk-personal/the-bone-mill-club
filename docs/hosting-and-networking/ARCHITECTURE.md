@@ -122,7 +122,7 @@ sequenceDiagram
     VM->>RUN: F4 Start fixed job with task ID
     RUN-->>JOB: Launch execution
     JOB->>GW: F5 Request approved research tool
-    GW->>DB: F8 Check authority + budget; record use
+    GW->>DB: F8 Check authority and budget, then record use
     GW-->>JOB: Return sanitized result
     JOB->>GW: Submit citations + final report
     GW->>GW: Validate sources, citations, quality
@@ -132,11 +132,11 @@ sequenceDiagram
     opt Sensitive external action
         JOB->>GW: Propose exact action
         GW->>DB: Save approval, 24 h expiry
-        Note over VM,DB: Worker releases capacity; control scans approvals
+        Note over VM,DB: Worker releases capacity and control scans approvals
         VM->>DB: Read pending approval
         VM-->>User: Show approval request in private dashboard
         User->>VM: Approve or reject action
-        VM->>DB: Check expiry + exact payload; requeue if approved
+        VM->>DB: Check expiry and exact payload, then requeue if approved
         Note over VM,DB: No response means DENY
     end
 ```
@@ -164,7 +164,7 @@ flowchart LR
     OWNER["Owner<br/>OIDC + approved device"] -->|"Private UI only"| VM["bmc-control<br/>sa-bmc-control"]
     VM -->|"Subscriber + job runner"| SVC["Pub/Sub + Cloud Run Jobs API"]
     VM -->|"Task-state access"| FS["Firestore"]
-    JOB["bmc-research-job<br/>sa-bmc-research"] -->|"run.invoker; fixed audience"| GW["bmc-tool-gateway<br/>sa-bmc-gateway"]
+    JOB["bmc-research-job<br/>sa-bmc-research"] -->|"run.invoker with fixed audience"| GW["bmc-tool-gateway<br/>sa-bmc-gateway"]
     GW -->|"Scoped IAM"| FS
     GW -->|"Secret accessor: selected keys"| SEC["Secret Manager"]
     GW -->|"Artifact read/write"| OBJ["Cloud Storage"]
